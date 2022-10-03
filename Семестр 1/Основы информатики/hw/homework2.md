@@ -7,5 +7,10 @@
       (cons a (my-range (+ a d) b d))
       '()))
 
-
+(define (my-flatten l)
+  (if (null? l)
+      '()
+      (if (list? l)
+          (append (my-flatten (car l)) (my-flatten (cdr l)))
+          (list l))))
 ```
