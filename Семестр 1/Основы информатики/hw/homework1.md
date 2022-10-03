@@ -38,7 +38,7 @@
   (solve_q_by_D a b (D a b c)))
 ```
 
-### Задание 3
+### Проверка на простоту, НОД, НОК
 ```scheme
 (define (prime-test n i)
   (if (<= (* i i) n)
