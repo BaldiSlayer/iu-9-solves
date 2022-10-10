@@ -19,39 +19,39 @@
       (calendar day (- month 2 ) year)))
 ```
 ### Действительные корни квадратного уравнения
-Определите процедуру, принимающую коэффициенты a, b и c квадратного уравнения вида /ax/²+/bx/+/c/=0 и возвращающую список чисел — корней уравнения (один или два корня, или пустой список, если корней нет).
+Определите процедуру, принимающую коэффициенты a, b и c квадратного уравнения вида ax²+bx+c=0 и возвращающую список чисел — корней уравнения (один или два корня, или пустой список, если корней нет).
 
 ```scheme
 (define (D a b c)
-  (- (* b b)
-  (* 4 a c)))
+  (- (* b b) (* 4 a c)))
 
 (define (solve_q_by_D a b D)
   (if (>= D 0)
       (if (> D 0)
-          (list (/ (+ (- b) (sqrt D)) (* 2 a))
-                (/ (- (- b) (sqrt D)) (* 2 a)))
-          (list (/ (- b) (* 2 a))))
+          (list (/ (+ (- b) (sqrt D)) (* 2 a)) (/ (- (- b) (sqrt D)) (* 2 a)))
+          (list ( / (- b) (* a 2))))
       (list)))
 
-(define (solve a b c)
-  (solve_q_by_D a b (D a b c)))
+(define a 1)
+(define b 4)
+(define c 3)
+(display (solve_q_by_D a b (D a b c)))
 ```
 
 ### Проверка на простоту, НОД, НОК
 ```scheme
 (define (prime-test n i)
   (if (<= (* i i) n)
-      (if (= (remainder n i) 0)
+      (if (= 0 (remainder n i))
           #f
-          (prime-test n (+ 2 i)))
+          (prime-test n (+ i 2)))
       #t))
 
 (define (prime? n)
   (if (or (= n 2) (= n 3))
       #t
-      (if (and (>= n 5) (> (remainder n 2) 0))
-          (prime-test n 3)
+      (if (and (>= n 5) (> (remainder n 3) 0))
+          (prime-test 5 3)
           #f)))
 
 (define (my-gcd a b)
@@ -60,5 +60,5 @@
       (my-gcd b (remainder a b))))
 
 (define (my-lcm a b)
-  (quotient (* a b) (my-gcd a b)))
+  (quotient (* a b) (my-gcd a b)))  
 ```
