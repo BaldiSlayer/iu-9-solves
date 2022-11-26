@@ -1,0 +1,477 @@
+﻿<Sysmon schemaversion="4.50">
+<!-- version config 1.0.0.15.vb -->
+	<HashAlgorithms>md5,sha256</HashAlgorithms>
+	<CheckRevocation/>
+	<EventFiltering>
+		<RuleGroup name="create all processes" groupRelation="or">
+			<ProcessCreate onmatch="exclude">
+			</ProcessCreate>
+		</RuleGroup>
+		<RuleGroup name="Chage create time critical file" groupRelation="or">
+			<FileCreateTime onmatch="include">
+				<TargetFilename name="critical file type" condition="end with">.exe</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.bat</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.bin</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.cmd</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.com</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.cpl</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.gadget</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.inf1</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.inf</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.ins</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.inx</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.isu</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.job</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.jse</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.inx</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.jre</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.lnk</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.msc</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.msi</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.msp</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.mst</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.paf</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.pif</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.ps1</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.reg</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.rgs</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.sct</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.shb</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.shs</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.u3p</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.vb</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.vbs</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.vbe</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.vbscript</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.ws</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.wsf</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.js</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.cer</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.key</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.pfx</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.p7b</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.dll</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.sys</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.cpp</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.py</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.dmp</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.mdmp</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.dit</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.kirbi</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">\sam</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.rub</TargetFilename>
+				<TargetFilename name="critical file type" condition="end with">.hta</TargetFilename>
+			</FileCreateTime>
+		</RuleGroup>		
+		<RuleGroup name="Change create time critical file" groupRelation="or">
+			<FileCreateTime onmatch="exclude">
+				<TargetFilename name="temp path" condition="contains">\temp</TargetFilename>
+				<TargetFilename name="temp file" condition="end with">.tmp</TargetFilename>
+				<TargetFilename name="temp file" condition="end with">.~tmp</TargetFilename>
+				<TargetFilename name="temp file" condition="end with">.temp</TargetFilename>
+			</FileCreateTime>			
+		</RuleGroup>
+		<RuleGroup name="Network Connection is not internet browser and network service" groupRelation="or">
+			<NetworkConnect onmatch="exclude">
+				<Image name="chrome" condition="end with">\Google\Chrome\Application\chrome.exe</Image><!-->Updated<!-->
+				<DestinationIp name="loopback" condition="contains">0:0:0:0:0:0:0:1</DestinationIp>
+				<DestinationIp name="loopback" condition="contains">0.0.0.0</DestinationIp>
+				<DestinationIp name="loopback" condition="contains">127.0.0.1</DestinationIp>
+				<DestinationPortName name="protocol kerberos" condition="contains">kerberos</DestinationPortName>
+			</NetworkConnect>
+		</RuleGroup>
+		<RuleGroup name="Terminate critical process" groupRelation="or">
+			<ProcessTerminate onmatch="include">
+				<Image name="windows defender" condition="end with">\MsMpEng.exe</Image>
+				<Image name="windows defender" condition="contains">Antimalware Service Executable</Image>
+				<Image name="PROCESS in hardvaredevice" condition="begin with">\</Image>		
+			</ProcessTerminate>			
+		</RuleGroup>
+		<RuleGroup name="all driver load" groupRelation="or">
+			<DriverLoad onmatch="exclude">
+			</DriverLoad>
+		</RuleGroup>
+		<RuleGroup name="load image in not system path" groupRelation="or">
+			<ImageLoad onmatch="exclude">
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\ntdll.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\kernel32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\KernelBase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\user32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\advapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\cryptbase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\msvcrt.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\kernel.appcore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\sechost.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\ole32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\oleaut32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\clbcatq.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\bcryptprimitives.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\advpack.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\bcrypt.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\cryptsp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\shlwapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\rsaenh.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\shell32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\imm32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\nsi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\sspicli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\sspicli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\cryptsp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\uxtheme.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wldp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\windows.storage.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\windows.storage.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\combase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\msvcp_win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\crypt32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\SHCore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ucrtbase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\system32\rpcrt4.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\secur32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\msvfw32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\avicap32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\ucrtbase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\oleaut32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\combase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\user32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\ole32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\version.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\rpcrt4.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\msvcp_win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\kernel32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wow64cpu.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wow64.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wow64win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\KernelBase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\ntdll.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\shell32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\gdi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\win32u.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\gdi32full.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\kernel.appcore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\shlwapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\bcryptprimitives.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\cryptbase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wininet.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\SHCore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\crypt32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\sechost.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\bcrypt.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\msvcrt.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\advapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\jscript.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\jsproxy.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\gdi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\win32u.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\gdi32full.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\policymanager.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\policymanager.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wow64cpu.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wow64win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wow64.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wtsapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wtsapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\OnDemandConnRouteHelper.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\perfctrs.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\npmproxy.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\powrprof.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\netprofm.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\profapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\profapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winhttp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ntasn1.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msasn1.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\msasn1.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wintrust.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\wintrust.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ncrypt.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\version.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\IPHLPAPI.DLL</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\IPHLPAPI.DLL</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\cfgmgr32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\cfgmgr32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msvcp110_win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\msvcp110_win.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\userenv.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\iertutil.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\urlmon.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ntmarta.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\xmllite.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\propsys.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\FWPUCLNT.DLL</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\OneCoreCommonProxyStub.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\Windows.Security.Authentication.OnlineId.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\psapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winspool.drv</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\iwprn.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\amsi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\amsi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\tscfgwmi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\regapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\cfgbkend.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\netutils.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\netutils.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\netapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\netapi32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\setupapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\setupapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winnsi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msctf.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dsrole.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\logoncli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dbghelp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\dbghelp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\mswsock.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\utildll.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msvcr120.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\samcli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\NetSetupEngine.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dnsapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msvcp120.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\browcli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\PeerDist.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ImplatSetup.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ccmcore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dhcpcsvc.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\devobj.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\devobj.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dwmapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\dbgcore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wuaueng.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\WinTypes.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\atl.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\mscoree.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\srvcli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\hid.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wevtapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\wkscli.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\SysWOW64\winusb.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\rasadhlp.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winsta.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\umpdc.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\mssprxy.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\Wldap32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\WinSCard.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\taskschd.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\tquery.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\cryptdll.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\gpapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\cabinet.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\sppc.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\twinapi.appcore.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dhcpcsvc6.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\ncobjapi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\adtschema.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msobjs.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winmmbase.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\oleacc.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\dxgi.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\sxs.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\winmm.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\d3d11.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\DWrite.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\BCP47Langs.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\usp10.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\OneCoreUAPCommonProxyStub.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\comdlg32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\msimg32.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\Windows\System32\CoreMessaging.dll</ImageLoaded><!-->новый<!-->
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\WinSxS\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\SystemApps\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\microsoft.net\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\service\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\servicing\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\installer\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\ProgramData\Microsoft\Windows Defender\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\Program Files\WindowsApps\</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\sysmon64.exe</ImageLoaded>
+				<ImageLoaded name= "System path" condition="begin with">C:\windows\sysmon.exe</ImageLoaded>
+				<Image name= "Chrome" condition="end with">\Google\Chrome\Application\chrome.exe</Image>
+			</ImageLoad>
+		</RuleGroup>
+		<RuleGroup name="Create remote thread" groupRelation="or">
+			<CreateRemoteThread onmatch="exclude">				
+			</CreateRemoteThread>
+		</RuleGroup>
+		<RuleGroup name="RawAccessRead: not AV" groupRelation="or">
+			<RawAccessRead onmatch="exclude">
+				<Image name="System utils, big eps" condition="begin with">C:\Windows\System32\svchost.exe</Image>			
+			</RawAccessRead>
+		</RuleGroup>
+		<RuleGroup name="ProcessAccess: Critical Processes" groupRelation="or">
+			<ProcessAccess onmatch="include">
+				<TargetImage name="access critical process"  condition="end with">lsass.exe</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">wininit.exe</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">winlogon.exe</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">logonui.exe</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">smss.exe</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">lsass</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">wininit</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">winlogon</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">logonui</TargetImage>
+				<TargetImage name="access critical process"  condition="end with">smss</TargetImage>
+			</ProcessAccess>
+		</RuleGroup>
+		<RuleGroup name="ProcessAccess: Legitimate Processes, Big EPS" groupRelation="or">
+			<ProcessAccess onmatch="exclude">
+				<SourceImage name="Chrome Update, big eps" condition="begin with">C:\Program Files\Google\Update\GoogleUpdate.exe</SourceImage>
+				<SourceImage name="VMware, big eps" condition="begin with">C:\Program Files (x86)\VMware\Plug-in Service\</SourceImage>
+				<SourceImage name="VMware, big eps" condition="begin with">C:\Program Files \VMware\Plug-in Service\</SourceImage>
+				<SourceImage name="System, big eps" condition="begin with">C:\Windows\system32\CompatTelRunner.exe</SourceImage>
+				<SourceImage name="System, big eps" condition="begin with">C:\Windows\system32\sihost.exe</SourceImage>
+				<SourceImage name="System, big eps" condition="begin with">C:\Windows\system32\SearchProtocolHost.exe</SourceImage>
+				<SourceImage name="System, big eps" condition="begin with">C:\Windows\system32\csrss.exe</SourceImage>
+				<SourceImage name="VirtualBox" condition="is">C:\Windows\System32\VBoxService.exe</SourceImage> 			
+			</ProcessAccess>
+		</RuleGroup>		
+		<RuleGroup name="create critical file" groupRelation="or">
+			<FileCreate onmatch="include">
+				<TargetFilename name="Executable" condition="end with">.exe</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.bat</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.ini</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Executable" condition="end with">.bin</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.cmd</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.com</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.cpl</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.gadget</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.inf1</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.inf</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.ins</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.inx</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.isu</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.job</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.jse</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.inx</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.jre</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.lnk</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.msc</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.msi</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.msp</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.mst</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.paf</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.pif</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.ps1</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.reg</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.rgs</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.sct</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.shb</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.shs</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.u3p</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.vb</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.vbs</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.vbe</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.vbscript</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.ws</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.wsf</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.js</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.cer</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.key</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.pfx</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.p7b</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.dll</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.sys</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.py</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.rub</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.dmp</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.mdmp</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.dit</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.kirbi</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.hta</TargetFilename> 
+				<TargetFilename name="Executable" condition="end with">.xsl</TargetFilename> 
+				<TargetFilename name="Critical" condition="end with">\sam</TargetFilename>
+				<TargetFilename name="Executable" condition="contains">mimilsa</TargetFilename>
+                <TargetFilename name="Executable" condition="end with">.hta</TargetFilename>
+                <TargetFilename name="Executable" condition="end with">.xll</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.scr</TargetFilename>
+				<TargetFilename name="Executable" condition="end with">.pl</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.xls</TargetFilename>
+				<TargetFilename name="Suspicious" condition="end with">.doc</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Suspicious" condition="end with">.pdf</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Suspicious" condition="end with">.ppt</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Suspicious" condition="end with">.jpg</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Suspicious" condition="end with">.jpeg</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Header file C" condition="end with">.h</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Source Code on C" condition="end with">.c</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Source Code on C++" condition="end with">.cpp</TargetFilename><!-->новый<!-->
+				<TargetFilename name="Executable" condition="contains">\system32\</TargetFilename>
+				<TargetFilename name="Executable" condition="contains">\syswow64\</TargetFilename>
+				<TargetFilename name="Executable" condition="contains">\windows\</TargetFilename>
+				<TargetFilename name="Executable" condition="contains">\appdata\</TargetFilename>
+				<TargetFilename name="Executable" condition="contains">\programdata\</TargetFilename> <!-->новый - под вопросом<!-->
+				<TargetFilename name="Executable" condition="contains">\Program Files</TargetFilename> <!-->новый - под вопросом<!-->
+			</FileCreate>
+		</RuleGroup>
+		<RuleGroup name="Legitimate files" groupRelation="or">
+			<FileCreate onmatch="exclude">
+				<TargetFilename name="prefetch file" condition="end with">.pf</TargetFilename><!-->новый<!-->
+				<Rule name = "Google Chrome" groupRelation = "and">
+					<TargetFilename name="Google Chrome" condition="contains">\Google\Chrome\User Data\</TargetFilename><!-->новый<!-->
+					<TargetFilename name="Google Chrome" condition="end with">.tmp</TargetFilename><!-->новый<!-->
+				</Rule>
+				<Rule name = "Firefox" groupRelation = "and">
+					<TargetFilename name="Firefox" condition="contains">\Mozilla\Firefox\Profiles\</TargetFilename><!-->новый<!-->
+					<Image name="Firefox" condition="end with">\firefox.exe</Image><!-->новый<!-->
+				</Rule>
+			</FileCreate>		
+		</RuleGroup>
+		<RuleGroup name="check reg edit" groupRelation="or">
+			<RegistryEvent onmatch="exclude">
+				<Image name="big eps" condition="begin with">C:\WINDOWS\Sysmon64.exe</Image>
+				<Image name="big eps" condition="begin with">C:\WINDOWS\Sysmon.exe</Image>
+				<Image name="big eps" condition="begin with">C:\WINDOWS\sigcheck64.exe</Image>
+				<Image name="big eps" condition="begin with">C:\WINDOWS\sysmon\sigcheck64.exe</Image><!-->Updated<!-->
+				<Image name="big eps" condition="begin with">C:\WINDOWS\Explorer.EXE</Image>
+				<Image name="big eps" condition="begin with">C:\Program Files (x86)\Google\Update\GoogleUpdate.exe</Image>
+				<Image name="big eps" condition="begin with">C:\Program Files\Google\Update\GoogleUpdate.exe</Image>
+				<Image name="big eps" condition="begin with">C:\WINDOWS\system32\MusNotifyIcon.exe</Image>
+				<Rule name = "system32" groupRelation = "and">
+					<Image name="system utils, big eps" condition="begin with">c:\windows\system32\</Image> 
+					<Image name="exlude impotant process" condition="excludes any">C:\Windows\System32\reg.exe;C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe </Image>
+				</Rule>
+				<Rule name="syswow64" groupRelation="and">
+					<Image name="system utils, big eps" condition="begin with">c:\windows\syswow64\</Image>
+					<Image name="exlude impotant process" condition="excludes any">C:\Windows\SysWOW64\reg.exe;C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe </Image>
+				</Rule>			
+				<Image name="Windows Defender, big eps" condition="begin with">C:\ProgramData\Microsoft\Windows Defender\platform\</Image>
+				<Image name="firefox, big eps" condition="end with">\firefox.exe</Image> 
+				<Image name="opera, big eps" condition="end with">\opera.exe</Image> 
+				<Image name="chrome, big eps" condition="is">C:\Program Files (x86)\Google\Chrome\Application\chrome.exe</Image> 
+				<Image name="chrome, big eps" condition="is">C:\Program Files\Google\Chrome\Application\chrome.exe</Image> 
+				<Image name="chrome, big eps" condition="end with">\Google\Chrome\Application\chrome.exe</Image> 
+				<Image name="YandexBrowser, big eps" condition="contains">\YandexBrowser\</Image> 
+				<Image name="Microsoft Edge, big eps" condition="end with">\microsoftedgecp.exe</Image> 
+				<Image name="Microsoft Edge, big eps" condition="end with">\msedge.exe</Image> 
+				<Image name="Microsoft Edge, big eps" condition="end with">\MicrosoftEdgeUpdate.exe</Image> 
+				<Image name="audio driver, big eps" condition="begin with">C:\Program Files (x86)\CONEXANT\SA3\HP-NB-AIO\SmartAudio3.exe</Image>
+				<Image name="audio driver, big eps" condition="begin with">C:\Program Files\CONEXANT\SA3\HP-NB-AIO\SmartAudio3.exe</Image> 
+				<TargetObject name="big eps hive" condition="begin with">HKLM\System\CurrentControlSet\Services\Tcpip\Parameters</TargetObject>
+				<TargetObject name="big eps hive" condition="begin with">HKLM\SOFTWARE\Microsoft\Office\ClickToRun</TargetObject>
+				<TargetObject name="big eps hive" condition="contains">\CurrentVersion\Internet Settings</TargetObject><!-->новый<!-->
+			</RegistryEvent>
+		</RuleGroup>
+		<RuleGroup name = "Create File Stream Hash" groupRelation="or">
+			<FileCreateStreamHash onmatch="exclude">
+			</FileCreateStreamHash>
+		</RuleGroup>
+		<RuleGroup name = "Dns Query" groupRelation="or">
+			<DnsQuery onmatch="exclude">
+			</DnsQuery>
+		</RuleGroup>
+		<RuleGroup name = "PIPE ALL" groupRelation="or">
+			<PipeEvent  onmatch="exclude">
+				<Image name="System utils, big eps" condition="begin with">C:\WINDOWS\system32\wbem\wmiprvse.exe</Image> 
+				<Image name="System utils, big eps" condition="begin with">C:\Windows\system32\DllHost.exe</Image> 
+				<Image name="VirtualBox" condition="is">C:\Windows\System32\VBoxService.exe</Image>
+			</PipeEvent >
+		</RuleGroup>
+		<RuleGroup name = "Wmi Event" groupRelation="or">
+			<WmiEvent   onmatch="exclude">
+			</WmiEvent>
+		</RuleGroup>
+		<RuleGroup name="ProcessTampering" groupRelation="or">
+			<ProcessTampering onmatch="exclude">
+			</ProcessTampering>
+		</RuleGroup>
+	</EventFiltering>
+</Sysmon>
