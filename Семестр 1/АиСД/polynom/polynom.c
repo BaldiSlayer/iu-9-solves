@@ -9,33 +9,33 @@
                                                         |___/                                              
  */
 
+
 #include <stdio.h>
 
-typedef long long ll;
-
-struct pair {
-    // first, second
-    ll f, s;
-};
-
-struct pair gorner(ll n, ll *a, ll x) {
-    struct pair ans = {0, 0};
-    for (ll i = 0; i <= n; ++i) {
-        ans.f = ans.f * x + a[i];
-        ans.s = ans.s * x + a[i]*(n - i);
+long long gorner(unsigned int n, long long* a, long long x) {
+    long long ans = 0;
+    for (unsigned int i = 0; i <= n; ++i) {
+        ans = ans * x + a[i];
     }
     return ans;
 }
 
-int main() {
-    ll n, x;
+long long gorner_from_derivative(unsigned int n, long long* a, long long x) {
+    long long ans = 0;
+    for (unsigned int i = 0; i < n; ++i) {
+        ans = ans * x + a[i] * (n - i);
+    }
+    return ans;
+}
+
+signed main() {
+    long long n, x;
     scanf("%lld%lld", &n, &x);
-    ll a[n+1];
-    for (ll i = 0; i <= n; ++i) {
+    long long a[n + 1];
+    for (size_t i = 0; i <= n; ++i) {
         scanf("%lld", &a[i]);
     }
-    struct pair answer = gorner(n, a, x);
-    printf("%lld\n%lld", answer.f, answer.s);
 
+    printf("%lld\n%lld\n", gorner(n, a, x), gorner_from_derivative(n, a, x));
     return 0;
 }
