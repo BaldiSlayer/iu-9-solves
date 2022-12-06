@@ -10,34 +10,35 @@
  */
 
 #include <stdio.h>
-#include <stdbool.h>
 
 const int N = 8;
 
-bool solve(int* a, int* b) {
+int solve(int* a, int* b) {
     for (int i = 0; i < N; ++i) {
-        bool is_found = false;
+        int is_found = 0;
         for (int j = 0; j < N; ++j) {
             if (a[i] == b[j]) {
                 // TODO
                 // если решение не будет заходить - поменять на INTMAX
                 b[j] = 1e9 + 228;
-                is_found = true;
+                is_found = 1;
                 break;
             }
         }
         if (!is_found) {
-            return false;
+            return 0;
         }
     }
-    return true;
+    return 1;
 }
 
-int main() {
-    int a[N], b[N];
+// если вдруг не будет заходить - поменять на int main(), но думаю все будет норм
+signed main() {
+    int a[N];
     for (int i = 0; i < N; ++i) {
         scanf("%d", &a[i]);
     }
+    int b[N];
     for (int i = 0; i < N; ++i) {
         scanf("%d", &b[i]);
     }
