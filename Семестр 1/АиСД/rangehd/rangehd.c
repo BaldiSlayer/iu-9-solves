@@ -13,7 +13,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define MAX_N 1000001
+#define MAX_N 1000228
 
 // дерево Фенвика
 int* fenwick;
@@ -22,7 +22,7 @@ int* fenwick;
 int get(int i) {
     int res = 0;
     for (; i > 0; i -= i & -i) {
-        res += fenwick[i];
+        res ^= fenwick[i];
     }
     return res;
 }
@@ -39,7 +39,7 @@ void update(int n, int i, int x) {
 
 // make fenwick tree O(NlogN), TODO to O(n)
 void tree_make(int n, char* arr) {
-    int* tree = calloc((size_t)(n + 1), sizeof(int));
+    fenwick = calloc((size_t)(n + 1), sizeof(int));
     for (int i = 0; i < n; ++i) {
         update(n, i + 1, (1 << (arr[i] - 'a')));
     }
