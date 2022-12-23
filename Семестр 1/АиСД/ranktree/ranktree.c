@@ -225,6 +225,8 @@ int main() {
             free(type);
             break;
         }
+
+        free(type);
     }
 
     // очистка BST
