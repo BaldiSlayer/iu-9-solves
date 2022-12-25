@@ -1,6 +1,6 @@
 ### Вспомогательная структура данных — поток (stream)
 
-```Scheme
+```scheme
 ;; Конструктор потока
 (define (make-stream items . eos)
   (if (null? eos)
@@ -27,7 +27,11 @@
     (if (not (null? (car stream)))
         (set-car! stream (cdr (car stream))))
     n))
-    
+
+(define (expect stream term error)
+    (if (equal? (peek stream) term)
+        (next stream)
+        (error #f)))    
 ```
 
 
