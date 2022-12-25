@@ -42,8 +42,8 @@
 ```BNF
 <frac>            ::= <signed-num> / <unsigned-num>
 <signed-num>      ::= + <unsigned-num> | - <unsigned-num> | <unsigned-num>
-<unsigned-num>    ::= ЦИФРА <num-tail>
-<num-tail>        ::= ЦИФРА <num-tail> | <empty>
+<unsigned-num>    ::= <num-tail>
+<num-tail>        ::= <num-tail> | <empty>
 <empty>           ::=
 ```
 
