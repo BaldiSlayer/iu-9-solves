@@ -108,7 +108,7 @@
 
 ```
 
-### `check-frac`
+### `scan-frac`
 
 #### БНФ
 
@@ -166,7 +166,7 @@
      (and (eqv? (peek stream) 'EOF)
           res))))
 
-(display (scan-frac "-1/2"))     ;; #-1/2
+(display (scan-frac "-1/2"))     ;; -1/2
 (newline)
 (display (scan-frac "inf/2"))    ;; #f
 (newline)
@@ -178,3 +178,6 @@
 (newline)
 (display (scan-frac ""))         ;; #f
 ```
+
+### `scan-many-fracs`
+
