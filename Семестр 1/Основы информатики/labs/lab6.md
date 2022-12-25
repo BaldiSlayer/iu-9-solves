@@ -81,23 +81,25 @@
            (num-tail stream error))
           (else #t)))
   
+  ;; создаем поток
   (define stream (make-stream (string->list str) 'EOF))
   
+  ;; Создаём точку возврата
   (call-with-current-continuation
    (lambda (error)
      (frac stream error)
      (eqv? (peek stream) 'EOF))))
 
-(display (check-frac "1/2"))     ;;#t
+(display (check-frac "1/2"))     ;; #t
 (newline)
-(display (check-frac "inf/2"))   ;;#f
+(display (check-frac "inf/2"))   ;; #f
 (newline)
-(display (check-frac "1/ui"))    ;;#f
+(display (check-frac "1/ui"))    ;; #f
 (newline)
-(display (check-frac "oi/dd"))   ;;#f
+(display (check-frac "oi/dd"))   ;; #f
 (newline)
-(display (check-frac "12"))      ;;#f
+(display (check-frac "12"))      ;; #f
 (newline)
-(display (check-frac ""))        ;;#f
+(display (check-frac ""))        ;; #f
 
 ```
