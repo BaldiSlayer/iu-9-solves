@@ -181,7 +181,7 @@
 
 ### `scan-many-fracs`
 
-``scheme
+```scheme
 (define (scan-many-fracs str)
   (load "stream.scm")
   
