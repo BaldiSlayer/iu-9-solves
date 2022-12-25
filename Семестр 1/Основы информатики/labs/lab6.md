@@ -1,4 +1,4 @@
-### Вспомогательная структура данных — поток (stream)
+## Вспомогательная структура данных — поток (stream)
 
 ```scheme
 ;; Конструктор потока
@@ -37,15 +37,19 @@
 
 ## Задание 1
 
-БНФ
+### `check-frac`
 
-```BNF
+#### БНФ
+
+```
 <frac>            ::= <signed-num> / <unsigned-num>
 <signed-num>      ::= + <unsigned-num> | - <unsigned-num> | <unsigned-num>
 <unsigned-num>    ::= <num-tail>
 <num-tail>        ::= <num-tail> | <empty>
 <empty>           ::=
 ```
+
+#### Код
 
 ```scheme
 
@@ -102,4 +106,75 @@
 (newline)
 (display (check-frac ""))        ;; #f
 
+```
+
+### `check-frac`
+
+#### БНФ
+
+```
+<frac>            ::= <signed-num> / <unsigned-num>
+<signed-num>      ::= + <unsigned-num> | - <unsigned-num> | <unsigned-num>
+<unsigned-num>    ::= <num-tail>
+<num-tail>        ::= <num-tail> | <empty>
+<empty>           ::=
+```
+
+#### Код
+
+```scheme
+(define (scan-frac str)
+  (load "stream.scm")
+
+  (define (signed-num stream error)
+    (cond ((equal? #\+ (peek stream))
+           (next stream)
+           (unsigned-num stream error))
+          ((equal? #\- (peek stream))
+           (next stream)
+           (- (unsigned-num stream error)))
+          (else (unsigned-num stream error))))
+  
+  (define (unsigned-num stream error)
+    (cond ((and (char? (peek stream))
+                (char-numeric? (peek stream)))
+           (string->number (list->string
+                            (cons (next stream)
+                                  (num-tail stream error)))))
+          (else (error #f))))
+  
+  (define (num-tail stream error)
+    (cond ((and (char? (peek stream))
+                (char-numeric? (peek stream)))
+           (cons (next stream)
+                 (num-tail stream error)))
+          (else '())))
+  
+  (define (frac stream error)
+    (define numerator (signed-num stream error))
+    (expect stream #\/ error)
+    (/ numerator
+       (unsigned-num stream error))) 
+  
+  ;; Создаем поток
+  (define stream (make-stream (string->list str) 'EOF))
+
+  ;; Создаём точку возврата
+  (call-with-current-continuation
+   (lambda (error)
+     (define res (frac stream error))
+     (and (eqv? (peek stream) 'EOF)
+          res))))
+
+(display (scan-frac "-1/2"))     ;; #-1/2
+(newline)
+(display (scan-frac "inf/2"))    ;; #f
+(newline)
+(display (scan-frac "1/ui"))     ;; #f
+(newline)
+(display (scan-frac "oi/dd"))    ;; #f
+(newline)
+(display (scan-frac "12"))       ;; #f
+(newline)
+(display (scan-frac ""))         ;; #f
 ```
