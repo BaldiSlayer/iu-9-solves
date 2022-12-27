@@ -181,6 +181,19 @@
 
 ### `scan-many-fracs`
 
+```
+
+<list-fracs>      ::= <spaces> <frac> <spaces> <сlist-fracs> | <empty>
+<spaces>          ::= <spaces> | <empty>
+<frac>            ::= <signed-num> / <unsigned-num>
+<signed-num>      ::= + <unsigned-num> | - <unsigned-num> | <unsigned-num>
+<unsigned-num>    ::= <num-tail>
+<num-tail>        ::= <num-tail> | <empty>
+<empty>           ::=
+
+```
+
+
 ```scheme
 (define (scan-many-fracs str)
   (load "stream.scm")
