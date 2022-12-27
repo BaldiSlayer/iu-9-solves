@@ -245,8 +245,8 @@
     (define numerator (signed-num stream error))
     (expect stream #\/ error)
     (/ numerator
-       (unsigned-num stream error)))
-
+       (unsigned-num stream error))) 
+  
   ;; создаем поток
   (define stream (make-stream (string->list str) 'EOF))
 
@@ -257,6 +257,8 @@
      (and (eqv? (peek stream) 'EOF)
           res))))
 
+(display (scan-many-fracs "\t1/2 1/3\n\n2/-5")) ;; #f
+(newline)
 (display (scan-many-fracs "\t1/2 1/3\n\n10/8"))   ;; (1/2 1/3 5/4)
 (newline)
 ```
