@@ -197,7 +197,18 @@
 
 ```scheme
 (define (scan-many-fracs str)
+  (define (is_all_spaces str)
+    (if (null? str)
+        '()
+        (if (not (char-whitespace? (car str)))
+            #f
+            (is_all_spaces (cdr str)))))
+
+  
+  
   (load "stream.scm")
+
+  
   
   (define (frac-list stream error)
     (cond ((and (char? (peek stream))
@@ -243,6 +254,7 @@
           (else '())))
   
   (define (frac stream error)
+      
     (define numerator (signed-num stream error))
     (expect stream #\/ error)
     (/ numerator
@@ -252,18 +264,18 @@
   (define stream (make-stream (string->list str) 'EOF))
 
   ;; Создаём точку возврата
-  (call-with-current-continuation
-   (lambda (error)
-     (define res (frac-list stream error))
-     (and (eqv? (peek stream) 'EOF)
-          res))))
+  (or (is_all_spaces (string->list str))
+      (call-with-current-continuation
+       (lambda (error)        
+         (define res (frac-list stream error))
+         (and (eqv? (peek stream) 'EOF)
+              res)))))
 
 (display (scan-many-fracs "\t1/2 1/3\n\n2/-5")) ;; #f
 (newline)
 (display (scan-many-fracs "\t1/2 1/3\n\n10/8"))   ;; (1/2 1/3 5/4)
 (newline)
-;;(scan-many-fracs " ")
-```
+(scan-many-fracs " ")
 
 ## Задание 2
 
