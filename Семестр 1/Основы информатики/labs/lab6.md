@@ -72,18 +72,20 @@
            (next stream)
            (num-tail stream error))
           (else (error #f))))
-  
-  (define (frac stream error)
-    (signed-num stream error)
-    (expect stream #\/ error)
-    (unsigned-num stream error))   
-  
+          
   (define (num-tail stream error)
     (cond ((and (char? (peek stream))
                 (char-numeric? (peek stream)))
            (next stream)
            (num-tail stream error))
           (else #t)))
+  
+  (define (frac stream error)
+    (signed-num stream error)
+    (expect stream #\/ error)
+    (unsigned-num stream error))   
+  
+  
   
   ;; создаем поток
   (define stream (make-stream (string->list str) 'EOF))
