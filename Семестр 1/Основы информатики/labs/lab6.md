@@ -276,6 +276,7 @@
 (display (scan-many-fracs "\t1/2 1/3\n\n10/8"))   ;; (1/2 1/3 5/4)
 (newline)
 (scan-many-fracs " ")
+```
 
 ## Задание 2
 
