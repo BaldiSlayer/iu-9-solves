@@ -279,3 +279,56 @@
 
 ## Задание 2
 
+```scheme
+(define (parse tokens)
+  (load "stream.scm")
+  
+  (define (program stream error)
+    (let* ((t-articles (articles stream error))
+           (t-body (body stream error)))
+      (list t-articles t-body)))
+  
+  (define (articles stream error)
+    (cond ((eqv? 'define (peek stream))
+           (let* ((t-article (article stream error))
+                  (t-articles (articles stream error)))
+             (cons t-article t-articles)))
+          (else '())))
+  
+  (define (article stream error)
+    (let* ((t-define (expect stream 'define error))
+           (t-word (next stream))
+           (t-body (body stream error))
+           (t-end (expect stream 'end error)))
+      (list t-word t-body)))
+  
+  (define (body stream error)
+    (cond ((eqv? 'if (peek stream))
+           (let* ((t-if (next stream))
+                  (t-body (body stream error))
+                  (t-endif (expect stream 'endif error))
+                  (t-body-tail (body stream error)))
+             (cons (list 'if t-body) t-body-tail)))
+          ((integer? (peek stream))
+           (let* ((t-integer (next stream))
+                  (t-body-tail (body stream error)))
+             (cons t-integer t-body-tail)))
+          ((and (symbol? (peek stream))
+                (not (eqv? (peek stream) 'endif))
+                (not (eqv? (peek stream) 'end)))
+           (let* ((t-word (next stream))
+                  (t-body-tail (body stream error)))
+             (cons t-word t-body-tail)))
+          (else '())))
+  
+  (define stream (make-stream (vector->list tokens) "EOF"))
+
+  
+  (call-with-current-continuation
+   (lambda (error)
+     (define res (program stream error))
+     (and (equal? (peek stream) "EOF")
+          res))))
+
+(display (parse #(1 2 +)))
+```
