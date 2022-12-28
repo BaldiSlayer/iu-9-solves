@@ -97,34 +97,25 @@ void push_back(Word word) {
     words->sz++;
 }
 
-void cleanup_words_array(words_array_t* arr) {
-    if (arr) {
-        free(arr->data);
-    }
-    free(arr);
-}
-
-int find_words(char* str, words_array_t** words) {
-    *words = make_words_array();
-    int words_count = 0;
-    char prev = ' ';
-    char* cur = str;
-    while (*cur != '\0') {
-        if (isspace(prev) && !isspace(*cur)) {
-            char* start = cur;
-            while (*cur != '\0' && !isspace(*cur)) {
-                ++cur;
+int find_words(char* str) {
+    words = make_words_array();
+    int cnt = 0;
+    char prev = ' ', *current = str;
+    for (; *current != '\0'; ) {
+        if (isspace(prev) && !isspace(*current)) {
+            char* start = current;
+            for ( ; *current != '\0' && !isspace(*current); ++current) {
             }
-            push_back((Word){start, cur - start});
-            words_count++;
+            push_back((Word){start, current - start});
+            ++cnt;
         } else {
-            cur++;
+            ++current;
         }
     }
-    return words_count;
+    return cnt;
 }
 
-void sorted_string_recovery(size_t words_count, size_t* count, words_array_t* words, char* dest) {
+void sorted_string_recovery(size_t words_count, size_t* count, char* dest) {
     int dest_index = 0;
     for (size_t i = 0; i < words_count; ++i) {
         size_t j = 0;
@@ -147,7 +138,7 @@ void sorted_string_recovery(size_t words_count, size_t* count, words_array_t* wo
 
 void csort(char* src, char* dest) {
     words = NULL;
-    size_t words_count = find_words(src, &words);
+    size_t words_count = find_words(src);
     if (!words_count) {
         return;
     }
@@ -161,14 +152,19 @@ void csort(char* src, char* dest) {
             }
         }
     }
-    sorted_string_recovery(words_count, count, words, dest);
-    cleanup_words_array(words);
+    sorted_string_recovery(words_count, count, dest);
+
+    if (words) {
+        free(words->data);
+    }
+    free(words);
+
     free(count);
 }
 
 signed main() {
     char* str = 0;
-    size_t sz = 0;
+    int sz = 0;
     getline(&str, &sz, stdin);
     char* ans = calloc(sz, sizeof(char));
     csort(str, ans);
