@@ -1,4 +1,7 @@
-```scheme
+аволыфждовыфлд
+
+```cpp
+
 ;; ~O((b - a) / d)
 (define (my-range a b d)
   (if (< a b)
@@ -6,7 +9,6 @@
       '()))
 
 ```
-
 
 (define (my-flatten xs)
   (if (null? xs)
@@ -55,4 +57,3 @@
         (car xs)
         (my-fold-left-for-right op (append (list (op (cadr xs) (car xs))) (cddr xs)))))
   (my-fold-left-for-right op (reverse xs)))
-```
