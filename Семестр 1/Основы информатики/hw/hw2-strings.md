@@ -1,10 +1,12 @@
 ```scheme
+
 ;; O(n) (n - количество пробельных символов)
 (define (string-trim-left s)
   (define (for s)
     (if (and (not (null? s)) (char-whitespace? (car s)))
         (for (cdr s))
         s))
+  
   
   (list->string (for (string->list s))))
 
@@ -57,4 +59,5 @@
             (for result (append now (car str)) (cdr str) sep))))
 
   (for '() '() (string->list str) (string->list sep)))
+
 ```
