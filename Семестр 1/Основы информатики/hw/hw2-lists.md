@@ -1,14 +1,10 @@
 аволыфждовыфлд
 
-```cpp
-
 ;; ~O((b - a) / d)
 (define (my-range a b d)
   (if (< a b)
       (cons a (my-range (+ a d) b d))
       '()))
-
-```
 
 (define (my-flatten xs)
   (if (null? xs)
