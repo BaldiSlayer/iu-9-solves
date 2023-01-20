@@ -1,5 +1,5 @@
 
-``` scheme
+```scheme
 ;; O(n) (n - количество пробельных символов)
 (define (string-trim-left s)
   (define (for s)
