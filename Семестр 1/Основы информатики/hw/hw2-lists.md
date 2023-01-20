@@ -1,55 +1,63 @@
-аволыфждовыфлд
 
-;; ~O((b - a) / d)
-(define (my-range a b d)
-  (if (< a b)
-      (cons a (my-range (+ a d) b d))
-      '()))
-
-(define (my-flatten xs)
-  (if (null? xs)
-      '()
-      (if (list? xs)
-          (append (my-flatten (car xs)) (my-flatten (cdr xs)))
-          (list xs))))
-
-(define (my-flatten xs)
-  (define (for result xs)
-    ;; если дошли до конца списка, возвращаем ответ
-    (if (null? xs)
-        result
-        (if (list? xs)
-            (for (for result (car xs)) (cdr xs))
-            (cons xs result))))
+``` scheme
+;; O(n) (n - количество пробельных символов)
+(define (string-trim-left s)
+  (define (for s)
+    (if (and (not (null? s)) (char-whitespace? (car s)))
+        (for (cdr s))
+        s))
   
-  (reverse (for '() xs)))
+  (list->string (for (string->list s))))
+
+;; O(n), но также есть константа, но в ассимптотике константу мы выбрасываем
+(define (string-trim-right s)
+  (define (for s)
+    (if (and (not (null? s)) (char-whitespace? (car s)))
+        (for (cdr s))
+        s))
+  
+  (list->string (reverse (for (reverse (string->list s))))))
+
+;; O(n)
+(define (string-trim s)
+  (string-trim-left (string-trim-right s)))
+
+;; O(min(len(a), len(b)))
+(define (string-prefix? a b)
+  (define (for a b)
+    (or (null? a) 
+        (and (not (null? b))
+            (and (equal? (car a) (car b))
+                (for (cdr a) (cdr b))))))
+  
+  (for (string->list a) (string->list b)))
+
+;; O(min(len(a), len(b)))
+(define (string-suffix? a b)
+  (define (for a b)
+    (or (null? a) 
+        (and (not (null? b))
+            (and (equal? (car a) (car b))
+                (for (cdr a) (cdr b))))))
+  
+  (for (reverse (string->list a)) (reverse (string->list b))))
+
+(define (string-infix? a b)
+  (and (> (string-length b) 0)
+       (or (string-prefix? a b)
+           (string-infix? a (substring b 1)))))
+
+;;O(n)
+(define (string-split str sep)
+  (define (for result now str sep)
+    (if (null? str)
+        (append result (list (string now)))
+        (if (string-prefix? (list->string sep) (list->string str))
+            (for (append result (list (string now))) '()
+              (string->list (substring (list->string str) (length sep))) sep)
+            (for result (append now (car str)) (cdr str) sep))))
+
+  (for '() '() (string->list str) (string->list sep)))
+```
 
 
-
-;; O(len(xs))
-(define (my-element? x xs)
-  (and (not (null? xs))
-       (or (equal? (car xs) x)
-           (my-element? x (cdr xs)))))                 
-
-;; O(len(xs))
-(define (my-filter pred? xs)
-  (if (null? xs)
-      '()
-      (if (pred? (car xs))
-          (append (list (car xs)) (my-filter pred? (cdr xs)))
-          (my-filter pred? (cdr xs)))))
-
-;; O(len(xs))
-(define (my-fold-left op xs)
-  (if (null? (cdr xs))
-      (car xs)
-      (my-fold-left op (append (list (op (car xs) (cadr xs))) (cddr xs)))))
-
-;; O(len(xs))
-(define (my-fold-right op xs)
-  (define (my-fold-left-for-right op xs)
-    (if (null? (cdr xs))
-        (car xs)
-        (my-fold-left-for-right op (append (list (op (cadr xs) (car xs))) (cddr xs)))))
-  (my-fold-left-for-right op (reverse xs)))
