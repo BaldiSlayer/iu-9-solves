@@ -1,3 +1,4 @@
+```scheme
 ;; ~O((b - a) / d)
 (define (my-range a b d)
   (if (< a b)
@@ -52,3 +53,4 @@
         (car xs)
         (my-fold-left-for-right op (append (list (op (cadr xs) (car xs))) (cddr xs)))))
   (my-fold-left-for-right op (reverse xs)))
+```
