@@ -1,3 +1,4 @@
+```scheme
 ;; TASK 1
 (define memoized-factorial
   (let ((known-results '()))
@@ -65,3 +66,4 @@
               (loop result (append (list cur) now)))))))
 
 ;; TASK 4
+```
