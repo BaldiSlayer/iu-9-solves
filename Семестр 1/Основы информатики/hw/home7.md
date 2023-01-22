@@ -257,3 +257,99 @@ alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -w "/h
 
 Файл
 Hi, i am alex. And i am a BMSTU student.
+
+
+# Задание 4
+```python
+import sys
+
+if __name__ == "__main__":
+    # <ключ> <файл, где ищем>
+    if len(sys.argv) != 3:
+        sys.stderr.write(f'{__file__}: Неправильные параметры вызова: правильно: speller.py <dict.txt> <text.txt>\n')
+
+    dct = str(sys.argv[1])
+    #dct = "/home/alexey/AaDS/b.txt"
+    try:
+        with open(dct) as f:
+            dictionary = f.readlines()
+            dictionary = [i.replace('\n', '') for i in dictionary]
+    except:
+        sys.stderr.write(f'{__file__}: не удается открыть указанный файл {dct}\n')
+        exit(0)
+
+    text = str(sys.argv[2])
+    # text = "/home/alexey/AaDS/text.txt"
+    try:
+        with open(text) as f:
+            text = f.readlines()
+            s = ''
+            for i in text:
+                s += str(i)
+
+            s = s.replace('.', ' ').replace(',', ' ').replace('!', ' ').replace('?', ' ')
+
+            now = ''
+            begin = -2
+            ind_i, ind_j = 0, 1 # идекс_столбца, индекс_строки
+
+            for i in s:
+                if i == '\n':
+                    ind_i = 0
+                    ind_j += 1
+                else:
+                    ind_i += 1
+
+                if i != ' ' and i != '\n':
+                    now += i
+                    if begin == -2:
+                        begin = [ind_j, ind_i]
+                else:
+                    if not now in dictionary and now != '':
+                        print(f'{begin[0]},\t{begin[1]}\t{now}')
+                    begin = -2
+                    now = ''
+
+            if not now in dictionary and now != '':
+                print(begin, now)
+            begin = -2
+            now = ''
+
+
+    except:
+        sys.stderr.write(f'{__file__}: не удается открыть указанный файл {text}\n')
+        exit(0)
+```
+
+
+hi
+nice
+to
+meet
+you
+
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+2,	4	meat
+2,	9	u
+
+hi nice
+to meat u
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+1,	4	noce
+2,	4	meat
+2,	9	u
+
+hi noce
+to meat u
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+1,	4	noce
+2,	4	meat
+3,	1	u
+
+
+hi noce
+to meat
+u
