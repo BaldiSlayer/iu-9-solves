@@ -218,6 +218,8 @@ alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -i "/h
 
 # Задание 3
 
+## Реализация
+
 ```python
 import os
 import sys
@@ -273,21 +275,42 @@ if __name__ == "__main__":
             print(s.count('\n'))
 ````
 
-
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -c "/home/alexey/AaDS/b.txt"
-84
-
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt"
-54
-
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -w "/home/alexey/AaDS/b.txt"
-10
-
-Файл
+### Содержимое файла `b.txt`
+```
 Hi, i am alex. And i am a BMSTU student.
+```
 
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -c "/home/alexey/AaDS/b.txt"
+```
+### Вывод
+```
+84
+```
+
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt"
+```
+### Вывод
+```
+54
+```
+
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -w "/home/alexey/AaDS/b.txt"
+```
+### Вывод
+```
+10
+```
 
 # Задание 4
+
+## Реализация
+
 ```python
 import sys
 
@@ -349,35 +372,63 @@ if __name__ == "__main__":
         exit(0)
 ```
 
-
+### Содержимое файла `b.txt`
+Он тут является словарем
+```
 hi
 nice
 to
 meet
 you
+```
 
-
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
-2,	4	meat
-2,	9	u
-
+### Содержимое файла `"/home/alexey/AaDS/text.txt"`
+```
 hi nice
 to meat u
+```
 
+### Запуск
+```
 alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+```
+### Вывод
+```
+2,	4	meat
+2,	9	u
+```
+
+### Содержимое файла `"/home/alexey/AaDS/text.txt"`
+```
+hi noce
+to meat u
+```
+
+### Запуск
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+### Вывод
 1,	4	noce
 2,	4	meat
 2,	9	u
 
-hi noce
-to meat u
 
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
-1,	4	noce
-2,	4	meat
-3,	1	u
-
-
+### Содержимое файла `"/home/alexey/AaDS/text.txt"`
+```
 hi noce
 to meat
 u
+```
+
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+```
+### Вывод
+```
+1,	4	noce
+2,	4	meat
+3,	1	u
+```
+
+
+
