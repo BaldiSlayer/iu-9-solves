@@ -148,3 +148,38 @@ if __name__ == "__main__":
                 break
 
 ```
+
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.tx" "a"
+/home/alexey/AaDS/main.py: не удается открыть указанный файл /home/alexey/AaDS/b.tx
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt" "a" 1
+├── a.c
+
+
+lexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.txt" "a"
+1 ├── a.c
+
+4 ├── main.py
+
+
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -i "/home/alexey/AaDS/b.txt" "a"
+├── a.c
+
+├── ASDin.c
+
+├── main.py
+
+Паттерн был найден 3 раз
+
+
+
+
+Содержимое файла b.txt
+
+├── a.c
+├── vgcheck
+├── ASDin.c
+├── main.py
+└── b.txt
