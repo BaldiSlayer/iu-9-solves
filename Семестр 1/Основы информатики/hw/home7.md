@@ -59,3 +59,14 @@ if __name__ == "__main__":
                 print(i, type(i))
                 f.writelines(str(i) + '\n')
 ```
+```
+├── a.c
+├── vgcheck
+├── main.c
+├── main.py
+└── b.txt
+```
+```
+python3 main.py -o "AaDS" "/home/alexey/AaDS/b.txt"
+python3 main.py -d "AaDS"
+```
