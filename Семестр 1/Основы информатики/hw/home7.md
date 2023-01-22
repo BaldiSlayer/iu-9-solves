@@ -78,6 +78,7 @@ python3 main.py -d "AaDS"
 import re
 import sys
 
+
 def reading(path):
     a = []
     try:
@@ -108,44 +109,46 @@ if __name__ == "__main__":
             count = int(sys.argv[4])
 
     if key == '-i':
-        #регистронезависимый поиск
+        # регистронезависимый поиск
         a = reading(path)
 
-        cnt = 0
-        for i in a:
-            if pattern.lower() in i.lower():
-                print(i)
-                cnt += 1
+        if a:
+            cnt = 0
+            for i in a:
+                if pattern.lower() in i.lower():
+                    print(i)
+                    cnt += 1
 
-        print(f"Паттерн был найден {cnt} раз")
+            print(f"Паттерн был найден {cnt} раз")
     elif key == '-n':
         # нумерация
         a = reading(path)
 
-        j = 0
-        for i in a:
-            j += 1
-            if pattern in i:
-                print(j, i)
+        if a:
+            j = 0
+            for i in a:
+                j += 1
+                if pattern in i:
+                    print(j, i)
     elif key == '-e':
         a = reading()
 
-        for i in a:
-            if re.match(pattern, i):
-                print(i)
+        if a:
+            for i in a:
+                if re.match(pattern, i):
+                    print(i)
     elif key == '-m':
-        print(count)
         a = reading(path)
 
-        j = 0
-        for i in a:
-            if pattern in i:
-                j += 1
-                print(i)
+        if a:
+            j = 0
+            for i in a:
+                if pattern in i:
+                    j += 1
+                    print(i)
 
-            print(j, count, j == count)
-            if j == count:
-                break
+                if j == count:
+                    break
 
 ```
 
