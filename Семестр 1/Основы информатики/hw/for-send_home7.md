@@ -324,7 +324,7 @@ import sys
 if __name__ == "__main__":
     # <ключ> <файл, где ищем>
     if len(sys.argv) != 3:
-        sys.stderr.write(f'{__file__}: Неправильные параметры вызова: правильно: speller.py <dict.txt> <text.txt>\n')
+        sys.stderr.write(f'{__file__}: Неправильные параметры вызова')
 
     dct = str(sys.argv[1])
     #dct = "/home/alexey/AaDS/b.txt"
@@ -397,7 +397,8 @@ to meat u
 
 ### Запуск
 ```
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py 
+"/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
 ```
 ### Вывод
 ```
@@ -412,7 +413,8 @@ to meat u
 ```
 
 ### Запуск
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py 
+"/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
 ### Вывод
 1,	4	noce
 2,	4	meat
@@ -428,7 +430,8 @@ u
 
 ### Запуск
 ```
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py "/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py 
+"/home/alexey/AaDS/b.txt" "/home/alexey/AaDS/text.txt"
 ```
 ### Вывод
 ```
