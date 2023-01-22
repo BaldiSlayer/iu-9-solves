@@ -70,3 +70,81 @@ if __name__ == "__main__":
 python3 main.py -o "AaDS" "/home/alexey/AaDS/b.txt"
 python3 main.py -d "AaDS"
 ```
+
+# Задание 2
+
+```python
+
+import re
+import sys
+
+def reading(path):
+    a = []
+    try:
+        with open(path) as f:
+            a = f.readlines()
+    except:
+        sys.stderr.write(f'{__file__}: не удается открыть указанный файл {path}\n')
+        return False
+
+    return a
+
+
+if __name__ == "__main__":
+    # <ключ> <файл, где ищем> <что ищем> <кол-во, если -m>
+    if len(sys.argv) == 0:
+        inp = input().split()
+        if inp[0] == '-m':
+            key, path, pattern, count = inp
+            count = int(count)
+        else:
+            ey, path, pattern = inp
+    else:
+        key = sys.argv[1]
+        path = sys.argv[2]
+        pattern = sys.argv[3]
+
+        if key == '-m':
+            count = int(sys.argv[4])
+
+    if key == '-i':
+        #регистронезависимый поиск
+        a = reading(path)
+
+        cnt = 0
+        for i in a:
+            if pattern.lower() in i.lower():
+                print(i)
+                cnt += 1
+
+        print(f"Паттерн был найден {cnt} раз")
+    elif key == '-n':
+        # нумерация
+        a = reading(path)
+
+        j = 0
+        for i in a:
+            j += 1
+            if pattern in i:
+                print(j, i)
+    elif key == '-e':
+        a = reading()
+
+        for i in a:
+            if re.match(pattern, i):
+                print(i)
+    elif key == '-m':
+        print(count)
+        a = reading(path)
+
+        j = 0
+        for i in a:
+            if pattern in i:
+                j += 1
+                print(i)
+
+            print(j, count, j == count)
+            if j == count:
+                break
+
+```
