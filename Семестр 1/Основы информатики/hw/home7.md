@@ -1,22 +1,6 @@
 # Задание 1
 
-## Без рисования дерева
-```python
-import os
-
-def list_files(startpath):
-    for root, dirs, files in os.walk(startpath):
-        level = root.replace(startpath, '').count(os.sep)
-        indent = ' ' * 4 * (level)
-        print('{}{}/'.format(indent, os.path.basename(root)))
-        subindent = ' ' * 4 * (level + 1)
-        for f in files:
-            print('{}{}'.format(subindent, f))
-
-list_files("/home/alexey/")
-```
-
-## Рабочий вариант
+## Реализация
 ```python
 import sys
 from pathlib import Path
@@ -59,6 +43,15 @@ if __name__ == "__main__":
                 print(i, type(i))
                 f.writelines(str(i) + '\n')
 ```
+
+## Тестирование
+
+### Запуск
+```
+python3 main.py -d "AaDS"
+```
+
+### Вывод
 ```
 ├── a.c
 ├── vgcheck
@@ -66,13 +59,24 @@ if __name__ == "__main__":
 ├── main.py
 └── b.txt
 ```
+
+### Запуск
 ```
 python3 main.py -o "AaDS" "/home/alexey/AaDS/b.txt"
-python3 main.py -d "AaDS"
+```
+
+### Содержимое файла `"/home/alexey/AaDS/b.txt"`
+```
+├── a.c
+├── vgcheck
+├── main.c
+├── main.py
+└── b.txt
 ```
 
 # Задание 2
 
+## Реализация
 ```python
 
 import re
@@ -152,22 +156,57 @@ if __name__ == "__main__":
 
 ```
 
+## Тестирование
 
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.tx" "a"
-/home/alexey/AaDS/main.py: не удается открыть указанный файл /home/alexey/AaDS/b.tx
+### Содержимое файла `b.txt`
 
-alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt" "a" 1
+```
 ├── a.c
+├── vgcheck
+├── ASDin.c
+├── main.py
+└── b.txt
+```
 
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.tx" "a"
+```
 
-lexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.txt" "a"
+### Вывод
+```
+/home/alexey/AaDS/main.py: не удается открыть указанный файл /home/alexey/AaDS/b.tx
+```
+
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt" "a" 1
+```
+
+### Вывод
+```
+├── a.c
+```
+
+### Запуск
+```
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -n "/home/alexey/AaDS/b.txt" "a"
+```
+
+### Вывод
+```
 1 ├── a.c
 
 4 ├── main.py
+```
 
-
-
+### Запуск
+```
 alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -i "/home/alexey/AaDS/b.txt" "a"
+```
+
+### Вывод
+```
 ├── a.c
 
 ├── ASDin.c
@@ -175,18 +214,7 @@ alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -i "/h
 ├── main.py
 
 Паттерн был найден 3 раз
-
-
-
-
-Содержимое файла b.txt
-
-├── a.c
-├── vgcheck
-├── ASDin.c
-├── main.py
-└── b.txt
-
+```
 
 # Задание 3
 
