@@ -186,3 +186,74 @@ alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -i "/h
 ├── ASDin.c
 ├── main.py
 └── b.txt
+
+
+# Задание 3
+
+```python
+import os
+import sys
+
+
+def reading(path):
+    a = []
+    try:
+        with open(path) as f:
+            a = f.readlines()
+    except:
+        sys.stderr.write(f'{__file__}: не удается открыть указанный файл {path}\n')
+        return False
+
+    return a
+
+
+if __name__ == "__main__":
+    # <ключ> <файл, где ищем>
+    if len(sys.argv) == 0:
+        inp = input().split()
+        key, path = inp
+    else:
+        key = sys.argv[1]
+        path = sys.argv[2]
+
+    if key == '-c':
+        print(os.path.getsize(path))
+    elif key == '-m':
+        a = reading(path)
+
+        if a:
+            print(sum([len(i) for i in a]))
+    elif key == '-w':
+        a = reading(path)
+
+        if a:
+            s = ''
+            for i in a:
+                s += str(i)
+
+            s = s.replace('.', ' ').replace(',', ' ').replace('!', ' ').replace('?', ' ')
+            s = len(s.split())
+            print(s)
+    elif key == '-l':
+        a = reading(path)
+
+        if a:
+            s = ''
+            for i in a:
+                s += str(i)
+
+            print(s.count('\n'))
+````
+
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -c "/home/alexey/AaDS/b.txt"
+84
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -m "/home/alexey/AaDS/b.txt"
+54
+
+alexey@alexey-ASUS-TUF-Gaming-F15-FX506LI-FX506LI:~/AaDS$ python3 main.py -w "/home/alexey/AaDS/b.txt"
+10
+
+Файл
+Hi, i am alex. And i am a BMSTU student.
