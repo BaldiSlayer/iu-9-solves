@@ -12,23 +12,22 @@ typedef struct {
     unsigned int size;
 } Typestack;
 
-Typestack* stack;
-int n;
-int* a;
 
-void stack_init() {
+Typestack* stack_init() {
+    Typestack* stack;
     stack = (Typestack*)malloc(sizeof(Typestack));
     stack->cap = 10;
     stack->size = 0;
     stack->data = malloc(10 * sizeof(task));
+    return stack;
 }
 
-void clean() {
+void clean(Typestack* stack) {
     free(stack->data);
     free(stack);
 }
 
-void push(int l, int r) {
+void push(Typestack* stack, int l, int r) {
     if (stack->size == stack->cap) {
         stack->data = realloc(stack->data, 2 * stack->cap * sizeof(task));
         stack->cap *= 2;
@@ -38,17 +37,17 @@ void push(int l, int r) {
     ++stack->size;
 }
 
-task top() {
+task top(Typestack* stack) {
     return stack->data[stack->size - 1];
 }
 
-task pop() {
-    task val = top();
+task pop(Typestack* stack) {
+    task val = top(stack);
     stack->size--;
     return val;
 }
 
-int partition(int low, int high) {
+int partition(int* a, int low, int high) {
     int x = a[high - 1], i = low, temp;
     for (int j = low; j < high - 1; ++j) {
         if (a[j] < x) {
@@ -68,19 +67,20 @@ int partition(int low, int high) {
 }
 
 
-void solve() {
+void solve(int n, int* a) {
     // инициализация стека
-    stack_init();
+
+    Typestack* stack = stack_init();
 
     // сортировка массива
-    push(0, n);
+    push(stack, 0, n);
     while (stack->size) {
-        int low = top().low, high = pop().high;
+        int low = top(stack).low, high = pop(stack).high;
 
         if (low < high - 1) {
-            int m = partition(low, high);
-            push(  low, m);
-            push(m + 1, high);
+            int m = partition(a, low, high);
+            push(stack,  low, m);
+            push(stack, m + 1, high);
         }
     }
 
@@ -90,10 +90,13 @@ void solve() {
     }
 
     // очиска стека
-    clean();
+    clean(stack);
 }
 
 signed main() {
+    int n;
+    int* a;
+
     scanf("%d", &n);
 
     a = (int*)malloc(n * sizeof(int));
@@ -102,7 +105,7 @@ signed main() {
         scanf("%d", &a[i]);
     }
 
-    solve(n);
+    solve(n, a);
 
     free(a);
 
