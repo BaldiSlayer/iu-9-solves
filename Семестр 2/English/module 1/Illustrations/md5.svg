@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 557 104" style="enable-background:new 0 0 557 104;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFDC;}
+	.st1{font-family:'MyriadPro-Regular';}
+	.st2{font-size:12px;}
+	.st3{fill:none;stroke:#FF0000;stroke-miterlimit:10;}
+	.st4{fill:#00038A;}
+	.st5{fill:#FF3535;}
+	.st6{fill:#009F31;}
+	.st7{fill:#FFFFE4;}
+	.st8{font-size:21px;}
+</style>
+<text transform="matrix(1 0 0 1 5.6741 53.522)" class="st0 st1 st2">hello, world</text>
+<line class="st3" x1="71.5" y1="49.5" x2="140.5" y2="49.5"/>
+<line class="st3" x1="140.5" y1="49.5" x2="134.5" y2="47.5"/>
+<line class="st3" x1="140.5" y1="49.5" x2="134.5" y2="51.5"/>
+<line class="st3" x1="253" y1="49.5" x2="322" y2="49.5"/>
+<line class="st3" x1="322" y1="49.5" x2="316" y2="47.5"/>
+<line class="st3" x1="322" y1="49.5" x2="316" y2="51.5"/>
+<g>
+	<path class="st4" d="M148.55,92.5c-1.13,0-2.05-0.92-2.05-2.05V9.55c0-1.13,0.92-2.05,2.05-2.05h96.89c1.13,0,2.05,0.92,2.05,2.05
+		v80.89c0,1.13-0.92,2.05-2.05,2.05H148.55z"/>
+	<path d="M245.45,8C246.3,8,247,8.7,247,9.55v80.89c0,0.86-0.7,1.55-1.55,1.55h-96.89c-0.86,0-1.55-0.7-1.55-1.55V9.55
+		C147,8.7,147.7,8,148.55,8H245.45 M245.45,7h-96.89C147.14,7,146,8.14,146,9.55v80.89c0,1.41,1.14,2.55,2.55,2.55h96.89
+		c1.41,0,2.55-1.14,2.55-2.55V9.55C248,8.14,246.86,7,245.45,7L245.45,7z"/>
+</g>
+<g>
+	<rect x="150.5" y="18.5" class="st0" width="91" height="70"/>
+	<path d="M241,19v69h-90V19H241 M242,18h-92v71h92V18L242,18z"/>
+</g>
+<g>
+	<circle class="st5" cx="239" cy="13" r="2"/>
+</g>
+<g>
+	<circle class="st6" cx="234.04" cy="13" r="2"/>
+</g>
+<g>
+	<circle class="st7" cx="229.04" cy="13" r="2"/>
+</g>
+<text transform="matrix(1 0 0 1 176.3389 59.1704)" class="st1 st8">md5</text>
+<text transform="matrix(1 0 0 1 327.5568 53.522)" class="st0 st1 st2">e4d7f1b4ed2e42d15898f4b27b019da4</text>
+</svg>
