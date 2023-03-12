@@ -1,8 +1,8 @@
 import requests, time
 
 USER = {
-    'email': 'Jedi.Aleksey@yandex.ru',
-    'password': 'saklfasdlfdsal;jk'
+    'email': '',
+    'password': ''
 }
 
 s = requests.session()
