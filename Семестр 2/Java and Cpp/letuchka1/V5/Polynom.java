@@ -2,8 +2,7 @@ import static java.lang.Math.*;
 public class Polynom {
     int n;
     Point points[];
-    public Polynom()
-    {
+    public Polynom() {
         // по умолчанию количество вершин - одна, и одна располагается в начале координат, точке (0,0)
         this.n = 1;
         Point pt1 = new Point(0, 0);
@@ -16,8 +15,7 @@ public class Polynom {
         this.n = n_;
     }
     
-    public void getInfo()
-    {
+    public void getInfo() {
         System.out.print("points count: ");
         System.out.println(this.n);
         System.out.println("Info about points");
