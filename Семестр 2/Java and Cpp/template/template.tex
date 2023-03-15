@@ -34,130 +34,80 @@
 \normalsize{Кафедра: Теоретическая информатика и компьютерные технологии}\\
 \hfill\break
 \begin{center}
-  \textbf{\large{Лабораторная работа №2}}\\
-  \large{Реализация простейшего класса на языке программирования \bfseries{Java}}\\
+  \textbf{\large{Лабораторная работа №1}}\\
+  \large{Настройка среды разработки Java}\\
+  \textbf{\large{Вариант №0}}\\
 \end{center}
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
+\hfill \break
 \hfill \break
 \hfill \break
 \hfill \break
 \begin{flushright}
   \normalsize{
     Выполнил\\
-    студент группы ИУ9-11Б\\
+    студент группы ИУ9-21Б\\
     Лисов Алексей
   }
 \end{flushright}
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
-\hfill \break
 
+\hfill \break
 \begin{center} Москва, 2023 \end{center}
 \thispagestyle{empty} % выключаем отображение номера для этой страницы
 % КОНЕЦ ТИТУЛЬНОГО ЛИСТА
 
 \section{Условие}
-Для освоения языка Java необходимо реализовать простой класс, задающий квадратные булевы матрицы и поддерживающий для них операции домножения и сложения, аналогом сложения для булевских значений считать операцию ИЛИ, аналогом умножения – операцию И. Условие задачи, исходный
-код и пример работы программы необходимо прислать в формате \LaTeX.
+Для освоения языка программирования Java требуется реализовать интерфейс для обеспечения возможности полиморфной обработки объектов класса. Реализовать интерфейс Comparable<T> и переопределить метод toString. Условие задачи, исходный код и пример работы программы необходимо прислать в формате \LaTeX.
 
 \section{Код решения}
 Файл Main.java
 \begin{minted}{java}
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
-        Boolean mas1[][] = {
-                {false, true},
-                {true, false}
+
+        Fraction[] a = new Fraction[] {
+                new Fraction(6, 5),
+                new Fraction(2, 2),
+                new Fraction(2, 2),
+                new Fraction(1, 2),
+
         };
+        System.out.println(a[1].compareTo(a[2]));
 
-        Boolean mas2[][] = {
-                {true, false},
-                {false, true}
-        };
+        Arrays.sort(a);
 
-        Matrix m1 = new Matrix(2, mas1);
-        Matrix m2 = new Matrix(2, mas2);
-
-        m1.Add(m2);
-        m1.Print();
-
-        System.out.println("\n");
-
-        Boolean mas3[][] = {
-                {false, true},
-                {true, false}
-        };
-        m1.ChangeMatrix(2, mas3);
-        m1.Print();
-
-        System.out.println("\n");
-
-        m1.Multiply(m2);
-        m1.Print();
+        for (Fraction s : a) {
+            System.out.println(s);
+        }
     }
 }
 \end{minted}
-Файл Matrix.java
+Файл Fraction.java
 \begin{minted}{java}
-public class Matrix {
-    int n;
-    Boolean Elements[][];
-    public Matrix(int n_, Boolean elems[][])
-    {
-        this.n = n_;
-        this.Elements = elems;
+public class Fraction implements Comparable<Fraction> {
+    public int ch, zn;
+
+    public Fraction(int ch_, int zn_) {
+        this.ch = ch_;
+        this.zn = zn_;
     }
 
-    public void ChangeMatrix(int n_, Boolean elems[][]) {
-        this.n = n_;
-        this.Elements = elems;
+    @Override
+    public String toString() {
+        return "Fraction {"
+                + "Числитель='" + this.ch + '\''
+                + ", Знаметель='" + this.zn
+                + "'}";
     }
 
-    public void Print() {
-        for (int i = 0; i < n;++i) {
-            for (int j = 0; j < n; ++j) {
-                System.out.print(this.Elements[i][j]);
-                System.out.print(" ");
-            }
-            System.out.print("\n");
-        }
-    }
-
-    public void Add(Matrix b) {
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < n; ++j) {
-                this.Elements[i][j] = 
-                (this.Elements[i][j] || b.Elements[i][j]);
-            }
-        }
-    }
-
-    public void Multiply(Matrix b) {
-       if (b.n != this.n) {
-            System.out.println("Нельзя умножать 
-                                матрицы разных размеров");
-        }
-        else {
-           Boolean[][] res = new Boolean[this.n][this.n];
-
-           for (int i = 0; i < this.n; ++i) {
-               for (int j = 0 ; j < this.n; ++j) {
-                   res[i][j] = false;
-               }
-           }
-
-            for (int i = 0; i < this.n; i++) {
-                for (int j = 0; j < this.n; j++) {
-                    for (int k = 0; k < this.n; k++) {
-                        res[i][j] = 
-                        (res[i][j] || (this.Elements[i][k] && 
-                        b.Elements[k][j]));
-                    }
-                }
-            }
-        }
+    @Override
+    public int compareTo(Fraction o) {
+        return (this.ch * o.zn) - (o.ch * this.zn);
     }
 }
 \end{minted}
