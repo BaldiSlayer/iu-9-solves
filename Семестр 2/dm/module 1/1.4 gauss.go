@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 )
 
 type Fraction struct {
@@ -30,11 +29,11 @@ func Reduce(f Fraction) Fraction {
 	gcd := Gcd(f.n, f.d)
 	f.n /= gcd
 	f.d /= gcd
+	if f.d < 0 {
+		f.n *= -1
+		f.d *= -1
+	}
 	return f
-}
-
-func Greater(f1 Fraction, f2 Fraction) bool {
-	return int(math.Abs(float64(f1.n)))*f2.d > int(math.Abs(float64(f2.n)))*f1.d
 }
 
 func Gcd(a, b int) int {
@@ -44,45 +43,73 @@ func Gcd(a, b int) int {
 	return a
 }
 
-func checkCramer(n int, a [][]Fraction, b []Fraction) bool {
-	if len(a) != n || len(a[0]) != n || len(b) != n {
+func CheckSolutions(a [][]Fraction, b []Fraction) bool {
+	// Check if the number of equations matches the number of variables
+	if len(a) != len(a[0]) {
 		return false
 	}
 
-	m := make([][]Fraction, n)
-	for i := range m {
-		m[i] = make([]Fraction, n+1)
-		copy(m[i], a[i])
-		m[i][n] = b[i]
+	// Calculate the determinant of the matrix A
+	det := Determinant(a)
+	if det.n == 0 {
+		if det.d == 1 {
+			return false
+		}
+		return true
 	}
 
-	rankA := gaussianElimination(n, n+1, m)
-	rankAugmented := gaussianElimination(n, n, a)
+	// Calculate the determinant of each matrix obtained by replacing one column of A by b
+	for j := 0; j < len(a[0]); j++ {
+		aCopy := make([][]Fraction, len(a))
+		for i := 0; i < len(a); i++ {
+			aCopy[i] = make([]Fraction, len(a[0]))
+			copy(aCopy[i], a[i])
+		}
+		for i := 0; i < len(a); i++ {
+			aCopy[i][j] = b[i]
+		}
+		detCopy := Determinant(aCopy)
+		if detCopy.n == 0 {
+			if detCopy.d == 1 {
+				return false
+			}
+		} else {
+			return true
+		}
+	}
 
-	return rankA == rankAugmented && rankA == n
+	return false
 }
 
-func gaussianElimination(n, m int, a [][]Fraction) int {
-	rank := 0
-	for row := 0; row < n; row++ {
-		pivot := row
-		for i := row + 1; i < n; i++ {
-			if Greater(a[i][row], a[pivot][row]) {
-				pivot = i
-			}
-		}
-		if pivot != row {
-			a[row], a[pivot] = a[pivot], a[row]
-		}
-		for i := row + 1; i < n; i++ {
-			coef := Divide(a[i][row], a[row][row])
-			for j := row; j < m; j++ {
-				a[i][j] = Subtract(a[i][j], Multiply(coef, a[row][j]))
-			}
-		}
-		rank++
+// Determinant calculates the determinant of a matrix given as fractions
+func Determinant(a [][]Fraction) Fraction {
+	if len(a) == 1 {
+		return a[0][0]
 	}
-	return rank
+
+	det := Fraction{0, 1}
+	sign := 1
+
+	for j := 0; j < len(a[0]); j++ {
+		aCopy := make([][]Fraction, len(a)-1)
+		for i := 0; i < len(a)-1; i++ {
+			aCopy[i] = make([]Fraction, len(a[0])-1)
+		}
+		for i := 1; i < len(a); i++ {
+			for k := 0; k < len(a[0]); k++ {
+				if k < j {
+					aCopy[i-1][k] = a[i][k]
+				} else if k > j {
+					aCopy[i-1][k-1] = a[i][k]
+				}
+			}
+		}
+		coef := Multiply(Fraction{sign * a[0][j].n, a[0][j].d}, Determinant(aCopy))
+		det = Add(det, coef)
+		sign = -sign
+	}
+
+	return det
 }
 
 func Gauss(a [][]Fraction, b []Fraction) (x []Fraction, success bool) {
@@ -97,8 +124,7 @@ func Gauss(a [][]Fraction, b []Fraction) (x []Fraction, success bool) {
 
 	brr2 := make([]Fraction, len(b))
 	copy(brr2, b)
-	if !checkCramer(n, arr2, brr2) {
-		fmt.Println("a")
+	if !CheckSolutions(arr2, brr2) {
 		return x, false
 	}
 
