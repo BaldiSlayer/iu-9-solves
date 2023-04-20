@@ -26,12 +26,14 @@ func Subtract(f1 Fraction, f2 Fraction) Fraction {
 }
 
 func Reduce(f Fraction) Fraction {
-	gcd := Gcd(f.n, f.d)
-	f.n /= gcd
-	f.d /= gcd
-	if f.d < 0 {
-		f.n *= -1
-		f.d *= -1
+	if f.n != 0 {
+		gcd := Gcd(f.n, f.d)
+		f.n /= gcd
+		f.d /= gcd
+		if f.d < 0 {
+			f.n *= -1
+			f.d *= -1
+		}
 	}
 	return f
 }
