@@ -10,7 +10,7 @@ import (
 
 func evaluate(expression []string) int {
 	stack := []int{}
-	for i := len(expression) - 2; i >= 0; i-- {
+	for i := len(expression) - 1; i >= 0; i-- {
 		token := expression[i]
 		if token == "+" {
 			op1 := stack[len(stack)-1]
@@ -48,8 +48,9 @@ func main() {
 	input = strings.ReplaceAll(input, "\n", "")
 
 	tokens := strings.Split(input, "")
+
 	result := evaluate(tokens)
 
 	fmt.Println(result)
-	os.Exit(0)
 }
+
