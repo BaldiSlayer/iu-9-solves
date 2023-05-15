@@ -131,6 +131,21 @@ func Gauss(a [][]Fraction, b []Fraction) (x []Fraction, success bool) {
 	}
 
 	for k := 0; k < n-1; k++ {
+		if a[k][k].n == 0 {
+			for i := k + 1; i < n; i++ {
+				if a[i][k].n != 0 {
+					temp := a[i]
+					a[i] = a[k]
+					a[k] = temp
+
+					temp2 := b[i]
+					b[i] = b[k]
+					b[k] = temp2
+					break
+				}
+			}
+		}
+
 		for i := k + 1; i < n; i++ {
 			if a[i][k].n != 0 {
 				lambda := Divide(a[i][k], a[k][k])

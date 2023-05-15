@@ -1,5 +1,3 @@
-#pragma GCC optimize("unroll-loops", "O3")
-
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -22,10 +20,13 @@ void divs(vector<ll> &a, ll n) {
 }
 
 signed main() {
-    ios_base::sync_with_stdio(0); cin.tie(0);
-
     ll x;
     cin >> x;
+
+    if (x==1){
+cout << "graph {\n1\n} ";
+    return 0;
+}
 
     vector<ll> dividers;
     divs(dividers, x);

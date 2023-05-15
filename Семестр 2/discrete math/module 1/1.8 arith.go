@@ -169,7 +169,6 @@ func (p *parser) parseF() (int, error) {
 		if value, ok := p.variables[name]; ok {
 			return value, nil
 		}
-		fmt.Printf("Enter value of variable %s: ", name)
 		var input string
 		fmt.Scanln(&input)
 		value, err := strconv.Atoi(input)
@@ -215,25 +214,27 @@ func (p *parser) currToken() Lexem {
 }
 
 func main() {
-
-	expr := "-x * (x+10) * (128/x-5)"
-	//expr := string(os.Args[1])
+	expr := string(os.Args[1])
 	lexems := make(chan Lexem)
 	go lexer(expr, lexems)
 
+	flag := true
 	parser := newParser([]Lexem{})
 	for lexem := range lexems {
 		if lexem.Tag == ERROR {
 			fmt.Println("error")
-			os.Exit(1)
+			flag = false
+			break
 		}
 		parser.lexems = append(parser.lexems, lexem)
 	}
 
-	result, err := parser.parse()
-	if err != nil {
-		fmt.Println("error")
-		os.Exit(1)
+	if flag {
+		result, err := parser.parse()
+		if err != nil {
+			fmt.Println("error")
+		} else {
+			fmt.Println(result)
+		}
 	}
-	fmt.Println(result)
 }

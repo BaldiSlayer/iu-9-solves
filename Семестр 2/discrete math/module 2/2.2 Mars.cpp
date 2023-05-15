@@ -33,8 +33,6 @@ bool DFS(vector<vector<int>>& graph, vector<pair<set<int>, set<int>>>& comps,
 }
 
 signed main() {
-	ios_base::sync_with_stdio(0); cin.tie(0);
-
 	int n;
 	cin >> n;
 
@@ -85,13 +83,12 @@ signed main() {
 				// проверяем нужно ли переворачивать
 				// .first всегда лексикографически меньше, чем .second
 				if (!reversed[i][j]) {
-					if (reversed[i - 1][j - comps[i - 1].first.size()] &&
-						!reversed[i - 1][j - comps[i - 1].second.size()]) {
+					if (reversed[i - 1][j - comps[i - 1].first.size()]) {
 						reversed[i][j] = true;
 					}
 				}
 
-				dp[i][j] = true;				
+				dp[i][j] = true;
 			}
 		}
 	}
